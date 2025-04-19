@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --bg-primary: #1a202c;
+    --bg-secondary: #000000;
+    --text-primary: #e2e8f0;
+    --text-secondary: #a0aec0;
+    --border: #4a5568;
+    --card-bg: rgba(26, 32, 44, 0.3);
+  }
+  
+  .light {
+    --bg-primary: #f7fafc;
+    --bg-secondary: #ffffff;
+    --text-primary: #2d3748;
+    --text-secondary: #4a5568;
+    --border: #e2e8f0;
+    --card-bg: rgba(255, 255, 255, 0.3);
+  }
+  
+  html {
+    transition: background-color 0.3s ease;
+  }
+  
+  body {
+    background: linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary));
+  }
+  
+  .bg-opacity-30 {
+    background-color: var(--card-bg);
+  }
+  
+  .border {
+    border-color: var(--border);
+  }
+  
+  .text-primary {
+    color: var(--text-primary);
+  }
+  
+  .text-secondary {
+    color: var(--text-secondary);
+  }
+  
+  .slick-prev, .slick-next {
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .slick-prev:before, .slick-next:before {
+    display: none;
+  }
+  :root {
+    --bg-primary: #1a202c;
+    --bg-secondary: #000000;
+    --text-primary: #e2e8f0;
+    --text-secondary: #a0aec0;
+    --border: #4a5568;
+    --card-bg: rgba(26, 32, 44, 0.3);
+  }
+  
+  .light {
+    --bg-primary: #f7fafc;
+    --bg-secondary: #ffffff;
+    --text-primary: #2d3748;
+    --text-secondary: #4a5568;
+    --border: #e2e8f0;
+    --card-bg: rgba(255, 255, 255, 0.3);
+  }
+  
+  html {
+    transition: background-color 0.3s ease;
+  }
+  
+  body {
+    background: linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary));
+  }
+  
+  .bg-opacity-30 {
+    background-color: var(--card-bg);
+  }
+  
+  .border {
+    border-color: var(--border);
+  }
+  
+  .text-primary {
+    color: var(--text-primary);
+  }
+  
+  .text-secondary {
+    color: var(--text-secondary);
+  }
