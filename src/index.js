@@ -5,6 +5,15 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Analytics } from '@vercel/analytics/react';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+    <Analytics />
+  </React.StrictMode>
+);
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
