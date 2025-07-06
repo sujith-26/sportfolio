@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { FaEnvelope, FaGithub, FaLinkedin, FaTwitter, FaSun, FaMoon, FaChevronDown, FaGraduationCap, FaProjectDiagram, FaLaptopCode, FaRocket, FaDownload, FaShareAlt } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaEnvelope, FaGithub, FaLinkedin, FaInstagram, FaSun, FaMoon, FaChevronDown, FaDownload, FaShareAlt, FaTrophy, FaLaptopCode, FaGraduationCap, FaProjectDiagram, FaRocket } from 'react-icons/fa';
 import { TypeAnimation } from 'react-type-animation';
+import Particles from 'react-tsparticles';
+import { loadFull } from 'tsparticles';
 
 const About = () => {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
+  const [currentProject, setCurrentProject] = useState(0);
   const cursorRef = useRef(null);
 
   useEffect(() => {
@@ -56,13 +59,17 @@ const About = () => {
   };
 
   const handleResumeDownload = () => {
-    const resumeUrl = '/assets/Sujith_Resume.pdf'; // Ensure this path is correct
+    const resumeUrl = '/assets/Sujith_Resume.pdf';
     const link = document.createElement('a');
     link.href = resumeUrl;
     link.download = 'Sujith_Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  };
+
+  const particlesInit = async (main) => {
+    await loadFull(main);
   };
 
   const containerVariants = {
@@ -89,185 +96,222 @@ const About = () => {
       scale: 1,
       transition: { duration: 0.7, ease: 'easeOut' },
     },
+  };
+
+  const skillCardVariants = {
+    initial: { opacity: 0, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.5, ease: 'easeOut' },
+    },
     hover: {
-      scale: 1.03,
+      scale: 1.05,
+      boxShadow: '0 8px 16px rgba(59,130,246,0.2)',
       transition: { duration: 0.3 },
     },
   };
 
-  const hexTileVariants = {
-    initial: { scale: 1, y: 0 },
-    hover: {
-      scale: 1.1,
-      y: -5,
-      transition: { type: 'spring', stiffness: 300, damping: 15 },
-    },
-  };
-
-  const timelineItemVariants = {
-    hidden: { opacity: 0, x: -20 },
+  const projectVariants = {
+    hidden: { opacity: 0, x: 100 },
     visible: {
       opacity: 1,
       x: 0,
       transition: { duration: 0.5, ease: 'easeOut' },
     },
+    exit: {
+      opacity: 0,
+      x: -100,
+      transition: { duration: 0.5, ease: 'easeOut' },
+    },
   };
 
   const skills = [
-    { name: 'React', icon: <FaLaptopCode />, description: 'Building dynamic UIs with React and Redux.' },
-    { name: 'Node.js', icon: <FaLaptopCode />, description: 'Creating scalable APIs with Express.' },
-    { name: 'TypeScript', icon: <FaLaptopCode />, description: 'Enhancing code with type safety.' },
-    { name: 'AWS', icon: <FaRocket />, description: 'Deploying apps with EC2, S3, Lambda.' },
-    { name: 'MongoDB', icon: <FaLaptopCode />, description: 'Managing NoSQL databases.' },
-    { name: 'React Native', icon: <FaLaptopCode />, description: 'Developing cross-platform mobile apps.' },
-    { name: 'Tailwind CSS', icon: <FaLaptopCode />, description: 'Styling with utility-first CSS.' },
-    { name: 'Express', icon: <FaLaptopCode />, description: 'Building robust backend services.' },
+    { name: 'React', icon: <FaLaptopCode />, level: 90 },
+    { name: 'Node.js', icon: <FaLaptopCode />, level: 85 },
+    { name: 'TypeScript', icon: <FaLaptopCode />, level: 80 },
+    { name: 'AWS', icon: <FaRocket />, level: 75 },
+    { name: 'MongoDB', icon: <FaLaptopCode />, level: 85 },
+    { name: 'React Native', icon: <FaLaptopCode />, level: 70 },
+    { name: 'Tailwind CSS', icon: <FaLaptopCode />, level: 90 },
+    { name: 'Express', icon: <FaLaptopCode />, level: 80 },
+    { name: 'Flutter', icon: <FaLaptopCode />, level: 70 },
+    { name: 'Docker', icon: <FaLaptopCode />, level: 75 },
   ];
 
-  const timeline = [
+  const projects = [
     {
-      year: '2022',
       title: 'Started B.Tech in Information Technology',
-      description: 'Began my journey at Kongu Engineering College, diving into programming and software development.',
-      icon: <FaGraduationCap className="text-2xl text-blue-400" />,
+      description: 'Began my academic journey at Kongu Engineering College, focusing on software development and IT principles.',
+      icon: <FaGraduationCap className="text-xl text-blue-400" />,
+      year: '2022',
     },
     {
+      title: 'Alumni Portal',
+      description: 'Developed a MERN stack platform to connect alumni, recognized for its impact at Kongu Engineering College.',
+      icon: <FaProjectDiagram className="text-xl text-blue-400" />,
       year: '2023',
-      title: 'First Major Project: Alumni Portal',
-      description: 'Developed a MERN stack platform to connect alumni, earning recognition in college.',
-      icon: <FaProjectDiagram className="text-2xl text-blue-400" />,
     },
     {
-      year: '2024',
       title: 'Freelance Developer',
-      description: 'Worked on projects like FCC Virtual Garage, honing full-stack skills.',
-      icon: <FaLaptopCode className="text-2xl text-blue-400" />,
+      description: 'Contributed to projects like FCC Virtual Garage, enhancing full-stack development expertise.',
+      icon: <FaLaptopCode className="text-xl text-blue-400" />,
+      year: '2024',
     },
     {
+      title: 'KEC-STUDY-HUB Mobile App',
+      description: 'Built a study hub app during a 24-hour hackathon at CSD department, Kongu Engineering College.',
+      icon: <FaRocket className="text-xl text-blue-400" />,
       year: '2025',
-      title: 'Developed a mobile app: KEC-STUDY-HUB',
-      description: 'Participated in CSD dept 24hrs Hackathon and developed a Study-Hub-App.',
-      icon: <FaRocket className="text-2xl text-blue-400" />,
     },
     {
+      title: 'Open Source Contributions',
+      description: 'Actively contributed to multiple open-source projects on GitHub, enhancing community-driven software.',
+      icon: <FaGithub className="text-xl text-blue-400" />,
       year: '2025',
-      title: 'Contributed to Open Source',
-      description: 'Made significant contributions to open-source projects on GitHub.',
-      icon: <FaGithub className="text-2xl text-blue-400" />,
     },
   ];
+
+  const achievements = [
+    {
+      title: '1st Place, Hacknovate\'25',
+      description: 'Secured 1st place in a 24-hour hackathon at Kongu Engineering College for KEC-STUDY-HUB (2025).',
+      icon: <FaTrophy className="text-xl text-yellow-400" />,
+    },
+    {
+      title: '2nd Place, Hackathon at GCE',
+      description: 'Achieved 2nd place in a hackathon at Government College of Engineering, Erode (2024).',
+      icon: <FaTrophy className="text-xl text-yellow-400" />,
+    },
+    {
+      title: 'Runner-up, Samhita-24',
+      description: 'Earned runner-up position in the National Level Hackathon at MIT, Chennai (2024).',
+      icon: <FaTrophy className="text-xl text-yellow-400" />,
+    },
+    {
+      title: '2nd Place, DevForge\'25',
+      description: 'Secured 2nd place in a 30-hour hackathon at Kongu Engineering College (2025).',
+      icon: <FaTrophy className="text-xl text-yellow-400" />,
+    },
+  ];
+
+  const handlePrevProject = () => {
+    setCurrentProject((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
+  };
+
+  const handleNextProject = () => {
+    setCurrentProject((prev) => (prev === projects.length - 1 ? 0 : prev + 1));
+  };
 
   return (
     <motion.section
       id="about"
-      className={`relative py-24 min-h-screen ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}
+      className={`relative py-16 min-h-screen ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 0.8 }}
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900/20 to-purple-900/20 animate-gradient" />
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute w-2 h-2 bg-blue-500/50 rounded-full animate-particle top-10 left-20" />
-        <div className="absolute w-3 h-3 bg-purple-500/50 rounded-full animate-particle-delayed bottom-30 right-30" />
-        <div className="absolute w-2 h-2 bg-blue-400/50 rounded-full animate-particle top-50 left-80" />
-      </div>
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        options={{
+          particles: {
+            number: { value: 40, density: { enable: true, value_area: 800 } },
+            color: { value: theme === 'dark' ? '#60a5fa' : '#1e40af' },
+            shape: { type: 'circle' },
+            opacity: { value: 0.4, random: true },
+            size: { value: 2, random: true },
+            move: {
+              enable: true,
+              speed: 0.8,
+              direction: 'none',
+              random: false,
+              straight: false,
+              out_mode: 'out',
+              bounce: false,
+            },
+          },
+          interactivity: {
+            events: {
+              onhover: { enable: true, mode: 'repulse' },
+              onclick: { enable: true, mode: 'push' },
+            },
+            modes: {
+              repulse: { distance: 80, duration: 0.4 },
+              push: { particles_nb: 3 },
+            },
+          },
+          retina_detect: true,
+        }}
+        className="absolute inset-0 z-0"
+      />
       <div
         ref={cursorRef}
-        className="custom-cursor hidden md:block fixed w-8 h-8 rounded-full bg-blue-500/50 shadow-[0_0_20px_5px_rgba(59,130,246,0.6)] pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 transition-all duration-200"
+        className="custom-cursor hidden md:block fixed w-6 h-6 rounded-full bg-blue-500/40 shadow-[0_0_15px_5px_rgba(59,130,246,0.5)] pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 transition-all duration-200"
       />
-      <div className="container mx-auto px-4 sm:px-6 max-w-7xl relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <motion.h2
             variants={itemVariants}
-            className={`text-5xl sm:text-6xl md:text-7xl font-extrabold text-transparent bg-clip-text ${theme === 'dark' ? 'bg-gradient-to-r from-blue-400 to-purple-500' : 'bg-gradient-to-r from-blue-600 to-purple-600'}`}
+            className={`text-4xl sm:text-5xl font-bold text-transparent bg-clip-text ${theme === 'dark' ? 'bg-gradient-to-r from-blue-400 to-purple-500' : 'bg-gradient-to-r from-blue-600 to-purple-600'}`}
           >
             About Me
           </motion.h2>
           <TypeAnimation
-            sequence={['Developer', 1000, 'Innovator', 1000, 'Creator', 1000]}
+            sequence={['Full Stack Developer', 1000, 'Innovator', 1000, 'Problem Solver', 1000]}
             wrapper="p"
             cursor={true}
             repeat={Infinity}
-            className={`mt-4 text-lg sm:text-xl md:text-2xl ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}
+            className={`mt-3 text-lg sm:text-xl ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}
           />
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
           <motion.div
             variants={imageVariants}
             initial="initial"
             whileInView="visible"
-            whileHover="hover"
             viewport={{ once: true, margin: '-100px' }}
-            className="relative"
+            className="lg:col-span-1 space-y-4"
           >
             <div
-              className={`relative rounded-2xl overflow-hidden bg-opacity-30 backdrop-blur-md border ${theme === 'dark' ? 'bg-gray-800/30 border-gray-700/50' : 'bg-white/30 border-gray-200/50'} shadow-[0_0_10px_rgba(59,130,246,0.3)] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-shadow duration-300`}
+              className={`relative rounded-lg overflow-hidden bg-opacity-20 backdrop-blur-lg border ${theme === 'dark' ? 'bg-gray-800/20 border-gray-700/30' : 'bg-white/20 border-gray-200/30'} shadow-lg hover:shadow-[0_10px_20px_rgba(59,130,246,0.3)] transition-shadow duration-300`}
             >
               <img
-                src="/assets/image/sujithh.jpg"
+                src="/assets/image/sujith.jpeg"
                 alt="Sujith, Full Stack Developer"
-                className="w-full h-[400px] object-cover"
+                className="w-full h-[280px] object-cover"
                 loading="lazy"
               />
-              <div
-                className={`absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent ${theme === 'dark' ? 'from-gray-900/80' : 'from-gray-800/80'}`}
-              />
-              <div className="absolute bottom-6 left-6 text-gray-100">
-                <p className="text-xl font-semibold">Sujith</p>
-                <p className="text-sm text-gray-300">Full Stack Developer</p>
-              </div>
             </div>
-          </motion.div>
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            className="space-y-6"
-          >
-            <motion.h3
-              variants={itemVariants}
-              className={`text-2xl md:text-3xl font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}
-            >
-              Crafting the Future
-            </motion.h3>
+            <div className="text-center">
+              <p className={`text-base font-medium ${theme === 'dark' ? 'text-gray-100' : 'text-gray-800'}`}>Sujith</p>
+              <p className={`text-xs ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>Full Stack Developer</p>
+            </div>
             <motion.div
               variants={itemVariants}
-              className={`text-base md:text-lg leading-relaxed ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'}`}
-            >
-              <p>
-                I’m Sujith, a Full Stack Developer passionate about building seamless, innovative digital solutions. From intuitive frontends to robust backends, I turn ideas into reality.
-              </p>
-              <p className="mt-4">
-                Driven by creativity and technical expertise, I thrive on solving challenges and delivering impactful projects.
-              </p>
-            </motion.div>
-            <motion.div
-              variants={itemVariants}
-              className="flex gap-4"
+              className="flex flex-wrap gap-3 justify-center"
             >
               {[
                 {
                   url: 'https://github.com/sujith-26',
-                  icon: <FaGithub className="text-xl" />,
+                  icon: <FaGithub className="text-lg" />,
                   label: 'GitHub',
                 },
                 {
                   url: 'https://www.linkedin.com/in/sujith-g-33a390259',
-                  icon: <FaLinkedin className="text-xl" />,
+                  icon: <FaLinkedin className="text-lg" />,
                   label: 'LinkedIn',
                 },
                 {
                   url: 'https://www.instagram.com/_.sujith._26/profilecard/?igsh=MXVicjdrYXo1bGJvcg==',
-                  icon: <FaTwitter className="text-xl" />,
+                  icon: <FaInstagram className="text-lg" />,
                   label: 'Instagram',
                 },
               ].map((social) => (
@@ -276,49 +320,75 @@ const About = () => {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`relative group p-3 rounded-lg ${theme === 'dark' ? 'bg-gray-800/50 text-gray-200 hover:bg-blue-500/50' : 'bg-gray-200 text-gray-800 hover:bg-blue-200'}`}
+                  className={`relative group p-2 rounded-md bg-opacity-20 backdrop-blur-lg border ${theme === 'dark' ? 'bg-gray-800/20 border-gray-700/30 text-gray-200 hover:bg-blue-500/20' : 'bg-white/20 border-gray-200/30 text-gray-800 hover:bg-blue-200/20'}`}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   aria-label={`Visit Sujith's ${social.label}`}
                 >
                   {social.icon}
-                  <span className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden group-hover:block text-xs bg-gray-800 text-white rounded py-1 px-2">
+                  <span className="absolute left-1/2 -translate-x-1/2 bottom-full mb-1 hidden group-hover:block text-xs bg-gray-800 text-white rounded py-1 px-2">
                     {social.label}
                   </span>
                 </motion.a>
               ))}
             </motion.div>
+          </motion.div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            className="lg:col-span-2 space-y-6"
+          >
+            <motion.h3
+              variants={itemVariants}
+              className={`text-2xl font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}
+            >
+              Professional Overview
+            </motion.h3>
             <motion.div
               variants={itemVariants}
-              className="flex flex-wrap gap-4"
+              className={`text-base leading-relaxed ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'} bg-opacity-20 backdrop-blur-lg border ${theme === 'dark' ? 'bg-gray-800/20 border-gray-700/30' : 'bg-white/20 border-gray-200/30'} p-5 rounded-lg shadow-sm`}
+            >
+              <p>
+                I am Sujith, a dedicated Full Stack Developer with a B.Tech in Information Technology from Kongu Engineering College. Specializing in creating robust and user-centric digital solutions, I leverage modern technologies to deliver seamless web and mobile applications.
+              </p>
+              <p className="mt-3">
+                My expertise spans front-end and back-end development, with a focus on building scalable, efficient systems. I am passionate about embracing challenges, contributing to open-source communities, and driving innovation through code.
+              </p>
+            </motion.div>
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-wrap gap-3"
             >
               <motion.button
                 onClick={handleResumeDownload}
-                className={`relative group flex items-center gap-2 px-6 py-3 text-base font-medium rounded-lg text-white ${theme === 'dark' ? 'bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600' : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700'}`}
-                whileHover={{ scale: 1.05 }}
+                className={`relative group flex items-center gap-2 px-5 py-2 text-sm font-medium rounded-md text-white ${theme === 'dark' ? 'bg-blue-500 hover:bg-blue-600' : 'bg-blue-600 hover:bg-blue-700'}`}
+                whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(59,130,246,0.4)' }}
                 whileTap={{ scale: 0.95 }}
                 aria-label="Download Sujith's resume"
               >
                 <FaDownload className="text-sm" />
-                Download Resume
-                <span className="absolute left-1/2 -translate-x-1/2 -top-10 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2">
-                  Download my resume
+                Resume
+                <span className="absolute left-1/2 -translate-x-1/2 -top-8 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2">
+                  Download Resume
                 </span>
               </motion.button>
               <motion.a
                 href="#contact"
-                className={`flex items-center gap-2 px-6 py-3 text-base font-medium rounded-lg border-2 ${theme === 'dark' ? 'border-blue-500 text-blue-400 hover:bg-blue-500/20' : 'border-blue-600 text-blue-600 hover:bg-blue-600/20'}`}
-                whileHover={{ scale: 1.05 }}
+                className={`flex items-center gap-2 px-5 py-2 text-sm font-medium rounded-md border ${theme === 'dark' ? 'border-blue-500 text-blue-400 hover:bg-blue-500/20' : 'border-blue-600 text-blue-600 hover:bg-blue-600/20'}`}
+                whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(59,130,246,0.3)' }}
                 whileTap={{ scale: 0.95 }}
                 aria-label="Contact Sujith"
               >
                 <FaEnvelope className="text-sm" />
-                Let's Talk
+                Contact
               </motion.a>
               <motion.button
                 onClick={sharePortfolio}
-                className={`flex items-center gap-2 px-6 py-3 text-base font-medium rounded-lg border-2 ${theme === 'dark' ? 'border-purple-500 text-purple-400 hover:bg-purple-500/20' : 'border-purple-600 text-purple-600 hover:bg-purple-600/20'}`}
-                whileHover={{ scale: 1.05 }}
+                className={`flex items-center gap-2 px-5 py-2 text-sm font-medium rounded-md border ${theme === 'dark' ? 'border-purple-500 text-purple-400 hover:bg-purple-500/20' : 'border-purple-600 text-purple-600 hover:bg-purple-600/20'}`}
+                whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(236,72,153,0.3)' }}
                 whileTap={{ scale: 0.95 }}
                 aria-label="Share portfolio"
               >
@@ -327,8 +397,8 @@ const About = () => {
               </motion.button>
               <motion.button
                 onClick={toggleTheme}
-                className={`p-3 rounded-lg ${theme === 'dark' ? 'bg-gray-800/50 text-gray-200 hover:bg-gray-700/50' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}
-                whileHover={{ scale: 1.05 }}
+                className={`p-2 rounded-md bg-opacity-20 backdrop-blur-lg border ${theme === 'dark' ? 'bg-gray-800/20 border-gray-700/30 text-gray-200 hover:bg-gray-700/20' : 'bg-white/20 border-gray-200/30 text-gray-800 hover:bg-gray-300/20'}`}
+                whileHover={{ scale: 1.05, boxShadow: '0 0 15px rgba(59,130,246,0.3)' }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: 'spring', stiffness: 300 }}
                 aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
@@ -344,34 +414,39 @@ const About = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          className="mt-16"
+          className="mt-12"
         >
           <motion.h3
             variants={itemVariants}
-            className={`text-2xl md:text-3xl font-semibold text-center ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}
+            className={`text-2xl font-semibold text-center ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}
           >
-            My Toolkit
+            Technical Skills
           </motion.h3>
           <motion.div
-            variants={itemVariants}
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 justify-items-center"
+            variants={containerVariants}
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mt-6"
           >
             {skills.map((skill) => (
               <motion.div
                 key={skill.name}
-                variants={hexTileVariants}
+                variants={skillCardVariants}
                 initial="initial"
+                whileInView="visible"
                 whileHover="hover"
-                className={`relative flex flex-col items-center w-24 h-28 clip-hexagon bg-opacity-30 backdrop-blur-md border ${theme === 'dark' ? 'bg-gray-800/30 border-blue-500/50' : 'bg-white/30 border-blue-600/50'} shadow-[0_0_10px_rgba(59,130,246,0.3)] hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-shadow duration-300 will-change-transform`}
+                viewport={{ once: true }}
+                className={`relative p-4 rounded-lg bg-opacity-20 backdrop-blur-lg border ${theme === 'dark' ? 'bg-gray-800/20 border-gray-700/30' : 'bg-white/20 border-gray-200/30'} shadow-sm text-center`}
               >
-                <div className="text-2xl mt-4 mb-2">{skill.icon}</div>
-                <h4 className={`text-xs font-semibold text-center ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
+                <div className="flex justify-center mb-2">{skill.icon}</div>
+                <h4 className={`text-sm font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
                   {skill.name}
                 </h4>
-                <div
-                  className={`absolute inset-0 bg-gray-900/90 clip-hexagon flex items-center justify-center text-xs text-white p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${theme === 'dark' ? 'bg-gray-900/90' : 'bg-gray-800/90'}`}
-                >
-                  {skill.description}
+                <div className={`mt-2 w-full h-1.5 rounded-full ${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-200'}`}>
+                  <motion.div
+                    className="h-full rounded-full bg-blue-500"
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${skill.level}%` }}
+                    transition={{ duration: 0.8, ease: 'easeOut' }}
+                  />
                 </div>
               </motion.div>
             ))}
@@ -383,140 +458,134 @@ const About = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          className="mt-16"
+          className="mt-12"
         >
           <motion.h3
             variants={itemVariants}
-            className={`text-2xl md:text-3xl font-semibold text-center ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}
+            className={`text-2xl font-semibold text-center ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}
           >
-            My Journey
+            Professional Journey
           </motion.h3>
-          <div className="relative mt-12">
-            <div className={`absolute left-8 sm:left-1/2 sm:-translate-x-1/2 h-full w-1.5 ${theme === 'dark' ? 'bg-gradient-to-b from-blue-500 to-purple-500' : 'bg-gradient-to-b from-blue-600 to-purple-600'}`} />
-            {timeline.reduce((acc, event, index) => {
-              const lastGroup = acc[acc.length - 1];
-              if (lastGroup && lastGroup.year === event.year) {
-                lastGroup.events.push({ ...event, id: `${event.year}-${index}` });
-              } else {
-                acc.push({ year: event.year, events: [{ ...event, id: `${event.year}-${index}` }] });
-              }
-              return acc;
-            }, []).map((group, groupIndex) => (
-              <motion.div
-                key={group.year}
-                variants={timelineItemVariants}
-                className="flex flex-col mb-10 sm:mb-14 relative"
+          <div className="relative mt-6 overflow-hidden">
+            <div className="flex items-center justify-center">
+              <motion.button
+                onClick={handlePrevProject}
+                className={`p-2 rounded-full bg-opacity-20 backdrop-blur-lg border ${theme === 'dark' ? 'bg-gray-800/20 border-gray-700/30 text-gray-200' : 'bg-white/20 border-gray-200/30 text-gray-800'}`}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               >
-                <div className="flex items-center">
-                  <div className="w-14 sm:w-1/2 flex justify-end pr-6 sm:pr-10">
-                    <p className={`text-lg sm:text-xl font-bold ${theme === 'dark' ? 'text-gray-100' : 'text-gray-800'}`}>
-                      {group.year}
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </motion.button>
+              <div className="flex-1 mx-4 max-w-xl">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentProject}
+                    variants={projectVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    className={`p-5 rounded-lg bg-opacity-20 backdrop-blur-lg border ${theme === 'dark' ? 'bg-gray-800/20 border-gray-700/30' : 'bg-white/20 border-gray-200/30'} shadow-sm`}
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      {projects[currentProject].icon}
+                      <h4 className={`text-base font-medium ${theme === 'dark' ? 'text-blue-300' : 'text-blue-600'}`}>
+                        {projects[currentProject].title}
+                      </h4>
+                    </div>
+                    <p className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                      {projects[currentProject].description}
                     </p>
-                  </div>
-                  <div className="w-14 sm:w-14 flex justify-center">
-                    <motion.div
-                      className={`w-4 h-4 sm:w-5 sm:h-5 rounded-full ${theme === 'dark' ? 'bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.7)]' : 'bg-blue-600 shadow-[0_0_15px_rgba(59,130,246,0.5)]'}`}
-                      whileHover={{ scale: 1.5 }}
-                      transition={{ type: 'spring', stiffness: 300 }}
-                    />
-                  </div>
-                  <div className="w-0 sm:w-1/2" />
+                    <p className={`text-xs mt-2 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                      {projects[currentProject].year}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+              <motion.button
+                onClick={handleNextProject}
+                className={`p-2 rounded-full bg-opacity-20 backdrop-blur-lg border ${theme === 'dark' ? 'bg-gray-800/20 border-gray-700/30 text-gray-200' : 'bg-white/20 border-gray-200/30 text-gray-800'}`}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </motion.button>
+            </div>
+            <div className="flex justify-center mt-3 gap-1.5">
+              {projects.map((_, index) => (
+                <div
+                  key={index}
+                  className={`w-1.5 h-1.5 rounded-full ${index === currentProject ? (theme === 'dark' ? 'bg-blue-500' : 'bg-blue-600') : (theme === 'dark' ? 'bg-gray-700' : 'bg-gray-300')}`}
+                />
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          className="mt-12"
+        >
+          <motion.h3
+            variants={itemVariants}
+            className={`text-2xl font-semibold text-center ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}
+          >
+            Achievements
+          </motion.h3>
+          <motion.div
+            variants={containerVariants}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6"
+          >
+            {achievements.map((achievement) => (
+              <motion.div
+                key={achievement.title}
+                variants={itemVariants}
+                className={`p-4 rounded-lg bg-opacity-20 backdrop-blur-lg border ${theme === 'dark' ? 'bg-gray-800/20 border-gray-700/30' : 'bg-white/20 border-gray-200/30'} shadow-sm hover:shadow-[0_8px_16px_rgba(59,130,246,0.2)] transition-shadow`}
+                whileHover={{ scale: 1.05 }}
+              >
+                <div className="flex items-center gap-3 mb-2">
+                  {achievement.icon}
+                  <h4 className={`text-base font-medium ${theme === 'dark' ? 'text-blue-300' : 'text-blue-600'}`}>
+                    {achievement.title}
+                  </h4>
                 </div>
-                {group.events.map((event) => (
-                  <div key={event.id} className="flex items-start mt-6">
-                    <div className="w-14 sm:w-1/2" />
-                    <div className="w-14 sm:w-14 flex justify-center">
-                      <div className={`w-2.5 h-2.5 rounded-full ${theme === 'dark' ? 'bg-blue-400' : 'bg-blue-500'}`} />
-                    </div>
-                    <div className="w-full sm:w-1/2 pl-6 sm:pl-10">
-                      <motion.div
-                        variants={timelineItemVariants}
-                        className={`p-5 sm:p-6 rounded-2xl bg-opacity-50 backdrop-blur-lg border ${theme === 'dark' ? 'bg-gray-800/50 border-blue-500/30' : 'bg-white/50 border-blue-600/30'} shadow-lg hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] transition-all duration-300`}
-                        whileHover={{ scale: 1.02, y: -2 }}
-                      >
-                        <div className="flex items-center gap-4 mb-3">
-                          {event.icon}
-                          <h4 className={`text-lg sm:text-xl font-semibold ${theme === 'dark' ? 'text-blue-300' : 'text-blue-600'}`}>
-                            {event.title}
-                          </h4>
-                        </div>
-                        <p className={`text-sm sm:text-base leading-relaxed ${theme === 'dark' ? 'text-gray-200' : 'text-gray-700'}`}>
-                          {event.description}
-                        </p>
-                      </motion.div>
-                    </div>
-                  </div>
-                ))}
+                <p className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                  {achievement.description}
+                </p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
       </div>
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 0.6, repeat: Infinity, repeatType: 'reverse' }}
+        transition={{ delay: 0.8, duration: 0.6, repeat: Infinity, repeatType: 'reverse' }}
       >
-        <a href="#projects" className="text-gray-300 hover:text-blue-400 shadow-[0_0_10px_rgba(59,130,246,0.5)]" aria-label="Scroll to next section">
-          <FaChevronDown className="text-2xl animate-bounce" />
+        <a href="#projects" className="text-gray-300 hover:text-blue-400 shadow-[0_0_8px_rgba(59,130,246,0.4)]" aria-label="Scroll to next section">
+          <FaChevronDown className="text-xl animate-bounce" />
         </a>
       </motion.div>
       <style>{`
-        .animate-gradient {
-          background-size: 200% 200%;
-          animation: gradientShift 15s ease infinite;
-        }
-        @keyframes gradientShift {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        .animate-particle {
-          animation: particleMove 10s ease-in-out infinite;
-        }
-        @keyframes particleMove {
-          0% { transform: translate(0, 0); opacity: 0.5; }
-          50% { transform: translate(20px, -20px); opacity: 1; }
-          100% { transform: translate(0, 0); opacity: 0.5; }
-        }
-        .animate-particle-delayed {
-          animation: particleMove 12s ease-in-out infinite 3s;
-        }
         .custom-cursor {
           transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
         }
         .custom-cursor.hover {
-          width: 3rem;
-          height: 3rem;
+          width: 2.5rem;
+          height: 2.5rem;
           background-color: rgba(236, 72, 153, 0.5);
-          box-shadow: 0 0 25px 10px rgba(236, 72, 153, 0.4);
-        }
-        .clip-hexagon {
-          clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+          box-shadow: 0 0 20px 8px rgba(236, 72, 153, 0.3);
         }
         @media (max-width: 640px) {
-          .timeline-container {
-            padding-left: 2rem;
-          }
-          .timeline-line {
-            left: 2rem;
-            transform: none;
-          }
-          .timeline-event {
-            flex-direction: column;
-            align-items: flex-start;
-          }
-          .timeline-year {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-          }
-          .timeline-content {
-            padding: 1rem;
-          }
-          .timeline-dot {
-            width: 0.875rem;
-            height: 0.875rem;
+          .custom-cursor {
+            display: none;
           }
         }
       `}</style>

@@ -22,50 +22,50 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: 'Alumni Association Portal',
-      description: 'A platform to connect alumni with their college for networking, events, and mentorship.',
-      longDescription: 'A MERN stack application enabling alumni to create profiles, access job boards, manage events, and engage in mentorship programs. Features secure JWT authentication, interactive maps, personalized dashboards, and automated email notifications.',
+      title: 'Alumni Association — SIH 2024 Project',
+      description: 'A cross-platform Alumni Engagement Portal to connect students, alumni, and mentors seamlessly.',
+      longDescription: 'A robust platform built for SIH 2024, enabling alumni to connect with students and mentors through profiles, events, and mentorship programs. Features secure authentication, interactive dashboards, and seamless communication tools.',
       whatIDid: [
-        'Designed and implemented the frontend using React and Tailwind CSS.',
-        'Developed RESTful APIs with Node.js, Express, and MongoDB.',
-        'Implemented JWT-based authentication and role-based access.',
-        'Integrated Nodemailer for event notification emails.',
-        'Built an interactive alumni map with Google Maps API.',
+        'Developed a responsive frontend using HTML, CSS, and Bootstrap.',
+        'Built backend APIs with Python and MongoDB for data management.',
+        'Implemented secure user authentication and role-based access.',
+        'Designed an interactive dashboard for alumni networking.',
+        'Integrated features for event management and mentorship coordination.',
       ],
       images: [
-        '/assets/image/alumini.jpg',
+        '/assets/image/alumni.jpg',
         'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80',
       ],
-      tags: ['react', 'node', 'mongodb', 'express', 'jwt', 'tailwind'],
-      github: 'https://github.com/sujith-26/Alumni-Association-Portal',
+      tags: ['html', 'css', 'bootstrap', 'python', 'mongodb'],
+      github: 'https://github.com/sujith-26/Alumni-Association-sih',
       demo: '#',
       featured: true,
       category: 'web',
-      date: '2023-06-15',
+      date: '2024-08-15',
       timeline: [
-        { date: '2023-04-01', milestone: 'Project Ideation' },
-        { date: '2023-05-01', milestone: 'Development Started' },
-        { date: '2023-06-15', milestone: 'Project Completed' },
+        { date: '2024-06-01', milestone: 'Project Ideation' },
+        { date: '2024-07-01', milestone: 'Development Started' },
+        { date: '2024-08-15', milestone: 'Project Completed' },
       ],
     },
     {
       id: 2,
       title: 'KEC Study Hub App',
-      description: 'A collaborative learning platform for students with resources, forums, and study tools.',
-      longDescription: 'A React Native app for cross-platform support, offering study materials, discussion forums, real-time chat, file sharing, and a task scheduler with reminders.',
+      description: 'A cross-platform Flutter app for students with academic resources, JDoodle IDE, and an interactive map.',
+      longDescription: 'A Flutter-based mobile application designed for students, offering academic resources, an integrated JDoodle IDE for coding, an interactive KEC map, and discussion forums for collaborative learning.',
       whatIDid: [
-        'Built a cross-platform app using React Native and Expo.',
-        'Integrated Firebase for real-time chat and file storage.',
-        'Designed a task scheduler with AsyncStorage.',
-        'Created a responsive UI with NativeBase.',
-        'Added push notifications for updates.',
+        'Built a cross-platform app using Flutter for iOS and Android.',
+        'Integrated Node.js and MongoDB for backend services.',
+        'Embedded JDoodle IDE for in-app coding practice.',
+        'Developed an interactive KEC map for navigation.',
+        'Designed a responsive UI with Flutter widgets.',
       ],
       images: [
         '/assets/image/studyhub.jpg',
         'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80',
       ],
-      tags: ['react-native', 'firebase', 'expo', 'nativebase'],
-      github: 'https://github.com/sujith-26/KEC-Study-Hub',
+      tags: ['flutter', 'node', 'mongodb'],
+      github: 'https://github.com/sujith-26/kec-app',
       demo: '#',
       featured: true,
       category: 'mobile',
@@ -106,22 +106,22 @@ const Projects = () => {
     },
     {
       id: 4,
-      title: 'FCC Virtual Garage',
-      description: 'A consultancy project for FCC to manage virtual vehicle inventories.',
-      longDescription: 'A scalable web app for real-time vehicle inventory tracking, maintenance logs, and customer interfaces, built with Next.js and MongoDB.',
+      title: 'Friends Car Care Consultancy Portal',
+      description: 'A web platform for vehicle service management, customer bookings, and admin oversight.',
+      longDescription: 'A scalable web application built with React.js (Vite) and MongoDB Atlas, enabling vehicle service management, customer appointment scheduling, and admin oversight with real-time updates.',
       whatIDid: [
-        'Developed a Next.js frontend with SSR for SEO.',
-        'Integrated MongoDB with Mongoose for data modeling.',
-        'Implemented real-time updates via WebSocket.',
-        'Built a customer portal with Stripe payments.',
-        'Ensured compliance with FCC standards.',
+        'Developed a fast frontend using React.js with Vite.',
+        'Integrated MongoDB Atlas with Node.js for data storage.',
+        'Built APIs for customer bookings and service tracking.',
+        'Designed an admin dashboard for oversight and analytics.',
+        'Implemented real-time updates for appointment statuses.',
       ],
       images: [
         '/assets/image/car.jpg',
         'https://images.unsplash.com/photo-1581235720704-06d1018152bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80',
       ],
-      tags: ['nextjs', 'mongodb', 'websocket', 'stripe'],
-      github: 'https://github.com/sujith-26/FCC-Virtual-Garage',
+      tags: ['react', 'vite', 'mongodb', 'node'],
+      github: 'https://github.com/sujith-26/6th-Sem-Project1',
       demo: '#',
       featured: true,
       category: 'web',
@@ -134,84 +134,58 @@ const Projects = () => {
     },
     {
       id: 5,
-      title: 'News Website',
-      description: 'A dynamic news platform with real-time updates and personalized feeds.',
-      longDescription: 'A news aggregation platform fetching articles via APIs, with personalized recommendations and an admin CMS, built with React and Node.js.',
+      title: 'Automated Jenkins Testing Pipeline',
+      description: 'An automated testing pipeline for code commits with Jenkins, Pytest, and Streamlit.',
+      longDescription: 'A CI/CD pipeline that automates testing on code commits using Jenkins, integrates Pytest for validation, and uses Streamlit for report visualization. GitHub Actions enhance workflow automation.',
       whatIDid: [
-        'Built a responsive frontend with React and Tailwind CSS.',
-        'Developed a Node.js backend with NewsAPI integration.',
-        'Implemented a CMS with CRUD operations.',
-        'Added Firebase Auth for user authentication.',
-        'Designed a basic ML recommendation engine.',
+        'Configured Jenkins for automated testing on code commits.',
+        'Integrated Pytest for unit and integration testing.',
+        'Built a Streamlit dashboard for test report visualization.',
+        'Set up GitHub Actions for workflow automation.',
+        'Ensured seamless CI/CD pipeline integration.',
       ],
       images: [
-        '/assets/image/news.jpg',
-        'https://images.unsplash.com/photo-1495020689067-958852a7765e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80',
+        '/assets/image/jenkins.jpg',
+        'https://images.unsplash.com/photo-1616530940355-351fabd68c34?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80',
       ],
-      tags: ['react', 'node', 'firebase', 'tailwind'],
-      github: 'https://github.com/sujith-26/News-Website',
+      tags: ['jenkins', 'github-actions', 'pytest', 'streamlit'],
+      github: 'https://github.com/sujith-26/Jenkins-AutoTesting',
       demo: '#',
-      featured: false,
-      category: 'web',
-      date: '2022-11-05',
+      featured: true,
+      category: 'devops',
+      date: '2024-05-20',
       timeline: [
-        { date: '2022-09-01', milestone: 'Project Ideation' },
-        { date: '2022-10-01', milestone: 'Development Started' },
-        { date: '2022-11-05', milestone: 'Project Completed' },
+        { date: '2024-03-01', milestone: 'Project Ideation' },
+        { date: '2024-04-01', milestone: 'Development Started' },
+        { date: '2024-05-20', milestone: 'Project Completed' },
       ],
     },
     {
       id: 6,
-      title: 'Mini Project: Todo App',
-      description: 'A simple todo app with task categorization and local storage.',
-      longDescription: 'A lightweight app for task management, built with vanilla JavaScript and Bootstrap, featuring drag-and-drop and local storage persistence.',
+      title: 'Alumniconnects',
+      description: 'A 30-hour hackathon project for alumni networking at DevForge\'25 by IT Association, Kongu Engineering College.',
+      longDescription: 'A Flutter-based mobile app developed during the DevForge\'25 hackathon, enabling alumni networking with features like profiles, event management, and mentorship, powered by Node.js and MongoDB.',
       whatIDid: [
-        'Designed a responsive UI with Bootstrap.',
-        'Implemented task logic with vanilla JavaScript.',
-        'Used local storage for persistence.',
-        'Added drag-and-drop task reordering.',
+        'Built a cross-platform app using Flutter for rapid development.',
+        'Developed backend APIs with Node.js and MongoDB.',
+        'Implemented user profiles and event management features.',
+        'Integrated mentorship coordination tools.',
+        'Designed a responsive UI for seamless user experience.',
       ],
       images: [
-        'https://images.unsplash.com/photo-1540350394557-8d14678e7f91?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80',
-        'https://images.unsplash.com/photo-1611224923851-80f91ce194d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80',
+        '/assets/image/alumniconnects.jpg',
+        'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80',
       ],
-      tags: ['javascript', 'bootstrap'],
-      github: 'https://github.com/sujith-26/Todo-App',
+      tags: ['flutter', 'node', 'mongodb'],
+      github: 'https://github.com/sujith-26/Alumniconnects',
       demo: '#',
-      featured: false,
-      category: 'web',
-      date: '2022-08-15',
+      featured: true,
+      category: 'mobile',
+      date: '2025-02-15',
       timeline: [
-        { date: '2022-07-15', milestone: 'Project Ideation' },
-        { date: '2022-08-01', milestone: 'Development Started' },
-        { date: '2022-08-15', milestone: 'Project Completed' },
-      ],
-    },
-    {
-      id: 7,
-      title: 'Mini Project: Weather App',
-      description: 'A weather forecasting app with real-time data from OpenWeatherMap.',
-      longDescription: 'A simple web app displaying weather data based on user location or search, built with React and custom CSS.',
-      whatIDid: [
-        'Developed the frontend with React and CSS.',
-        'Integrated OpenWeatherMap API for weather data.',
-        'Added geolocation for automatic updates.',
-        'Implemented a global city search feature.',
-      ],
-      images: [
-        '/assets/image/weather.jpg',
-        'https://images.unsplash.com/photo-1561484930-998b4bd74e91?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80',
-      ],
-      tags: ['react', 'css', 'api'],
-      github: 'https://github.com/sujith-26/Weather-App',
-      demo: '#',
-      featured: false,
-      category: 'web',
-      date: '2022-09-20',
-      timeline: [
-        { date: '2022-08-01', milestone: 'Project Ideation' },
-        { date: '2022-09-01', milestone: 'Development Started' },
-        { date: '2022-09-20', milestone: 'Project Completed' },
+        { date: '2025-02-13', milestone: 'Hackathon Ideation' },
+        { date: '2025-02-14', milestone: 'Development Started' },
+        { date: '2025-02-15', milestone: 'Project Completed' },
       ],
     },
   ];
@@ -250,7 +224,7 @@ const Projects = () => {
     const matchesFilter =
       filter === 'all' ||
       (filter === 'featured' && project.featured) ||
-      (['web', 'mobile'].includes(filter) && project.category === filter) ||
+      (['web', 'mobile', 'devops'].includes(filter) && project.category === filter) ||
       project.tags.includes(filter);
     const matchesSearch =
       !searchQuery ||
@@ -403,6 +377,7 @@ const Projects = () => {
               { label: `Featured (${projects.filter((p) => p.featured).length})`, value: 'featured' },
               { label: `Web (${projects.filter((p) => p.category === 'web').length})`, value: 'web' },
               { label: `Mobile (${projects.filter((p) => p.category === 'mobile').length})`, value: 'mobile' },
+              { label: `DevOps (${projects.filter((p) => p.category === 'devops').length})`, value: 'devops' },
             ].map((btn) => (
               <motion.button
                 key={btn.value}
@@ -536,9 +511,13 @@ const Projects = () => {
                                 ? theme === 'dark'
                                   ? 'bg-blue-500/20 text-blue-300'
                                   : 'bg-blue-100 text-blue-700'
+                                : project.category === 'mobile'
+                                ? theme === 'dark'
+                                  ? 'bg-purple-500/20 text-purple-300'
+                                  : 'bg-purple-100 text-purple-700'
                                 : theme === 'dark'
-                                ? 'bg-purple-500/20 text-purple-300'
-                                : 'bg-purple-100 text-purple-700'
+                                ? 'bg-green-500/20 text-green-300'
+                                : 'bg-green-100 text-green-700'
                             }`}
                           >
                             {project.category.charAt(0).toUpperCase() + project.category.slice(1)}
