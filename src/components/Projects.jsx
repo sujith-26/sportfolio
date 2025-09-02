@@ -1,23 +1,22 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiGithub, FiExternalLink, FiInfo, FiChevronUp, FiX, FiSearch, FiSun, FiMoon, FiDownload, FiChevronDown } from 'react-icons/fi';
-import { useSearchParams } from 'react-router-dom';
+import { FiGithub, FiExternalLink, FiInfo, FiChevronUp, FiX, FiSearch, FiDownload, FiChevronDown } from 'react-icons/fi';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { TypeAnimation } from 'react-type-animation';
+import { useTheme } from '../contexts/ThemeContext';
 
 const Projects = () => {
+  const { theme } = useTheme();
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
   const modalRef = useRef(null);
   const cursorRef = useRef(null);
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const projects = [
     {
@@ -33,7 +32,7 @@ const Projects = () => {
         'Integrated features for event management and mentorship coordination.',
       ],
       images: [
-        '/assets/image/alumni.jpg',
+        '/assets/image/alumini.jpg',
         'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80',
       ],
       tags: ['html', 'css', 'bootstrap', 'python', 'mongodb'],
@@ -145,7 +144,7 @@ const Projects = () => {
         'Ensured seamless CI/CD pipeline integration.',
       ],
       images: [
-        '/assets/image/jenkins.jpg',
+        'https://images.unsplash.com/photo-1556075798-4825dfaaf498?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80',
         'https://images.unsplash.com/photo-1616530940355-351fabd68c34?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80',
       ],
       tags: ['jenkins', 'github-actions', 'pytest', 'streamlit'],
@@ -173,8 +172,8 @@ const Projects = () => {
         'Designed a responsive UI for seamless user experience.',
       ],
       images: [
-        '/assets/image/alumniconnects.jpg',
         'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80',
+        'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80',
       ],
       tags: ['flutter', 'node', 'mongodb'],
       github: 'https://github.com/sujith-26/Alumniconnects',
@@ -191,14 +190,10 @@ const Projects = () => {
   ];
 
   useEffect(() => {
-    const urlFilter = searchParams.get('filter') || 'all';
-    setFilter(urlFilter);
-  }, [searchParams]);
-
-  useEffect(() => {
-    document.documentElement.classList.toggle('light', theme === 'light');
-    localStorage.setItem('theme', theme);
-  }, [theme]);
+    // Simulate loading
+    const timer = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -213,11 +208,8 @@ const Projects = () => {
     }
   }, []);
 
-  const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
-
   const handleFilterChange = (newFilter) => {
     setFilter(newFilter);
-    setSearchParams({ filter: newFilter });
   };
 
   const filteredProjects = projects.filter((project) => {
@@ -570,7 +562,6 @@ const Projects = () => {
                     onClick={() => {
                       setFilter('all');
                       setSearchQuery('');
-                      setSearchParams({ filter: 'all' });
                     }}
                     className={`mt-4 px-4 py-2 rounded text-white ${
                       theme === 'dark' ? 'bg-blue-500 hover:bg-blue-600' : 'bg-blue-600 hover:bg-blue-700'

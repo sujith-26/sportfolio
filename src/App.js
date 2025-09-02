@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { initSmoothScroll } from './utils/smoothScroll';
+import { ThemeProvider } from './contexts/ThemeContext';
+import { ToastProvider } from './components/ui/Toast';
+import ScrollProgress from './components/ui/ScrollProgress';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -38,24 +42,45 @@ function App() {
     };
   }, []);
 
+  const sections = [
+    { id: 'home', label: 'Home' },
+    { id: 'about', label: 'About' },
+    { id: 'skills', label: 'Skills' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'education', label: 'Education' },
+    { id: 'contact', label: 'Contact' },
+  ];
+
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={`min-h-screen bg-dark text-light ${isLoading ? 'loading' : ''}`}
+    <Router
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true,
+      }}
     >
-      <Navbar />
-      <main className="smooth-scroll-container">
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <EducationCertifications />
-        <Contact />
-      </main>
-      <Footer />
-    </motion.div>
+      <ThemeProvider>
+        <ToastProvider>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className={`min-h-screen bg-dark text-light ${isLoading ? 'loading' : ''}`}
+          >
+            <ScrollProgress sections={sections} />
+            <Navbar />
+            <main className="smooth-scroll-container">
+              <Hero />
+              <About />
+              <Skills />
+              <Projects />
+              <EducationCertifications />
+              <Contact />
+            </main>
+            <Footer />
+          </motion.div>
+        </ToastProvider>
+      </ThemeProvider>
+    </Router>
   );
 }
 
